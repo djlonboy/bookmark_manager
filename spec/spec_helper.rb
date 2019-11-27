@@ -27,14 +27,14 @@ RSpec.configure do |config|
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
-  ENV['RACK_ENV'] = 'test'
+   ENV['RACK_ENV'] = 'test'
 
 require File.join(File.dirname(__FILE__), '..', 'app.rb')
 
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-
+require 'features/web_helper'
 
 Capybara.app = BookmarkManager
 
