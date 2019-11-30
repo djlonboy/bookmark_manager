@@ -3,15 +3,11 @@ require 'pg'
 
 class Bookmark
   def self.all
-    # [
-    #   "www.google.co.uk",
-    #   "www.bbc.co.uk",
-    #   "www.makersacademy.com"
-    #     ]
+    
     if ENV['RACK_ENV'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
     else
-    connection = PG.connect(dbname: 'bookmark_manager')
+      connection = PG.connect(dbname: 'bookmark_manager')
     end
     result = connection.exec('SELECT * FROM bookmarks')
     result.map { |bookmark| bookmark['url'] }
@@ -22,7 +18,7 @@ class Bookmark
     if ENV['RACK_ENV'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
     else
-    connection = PG.connect(dbname: 'bookmark_manager')
+      connection = PG.connect(dbname: 'bookmark_manager')
     end
     connection.exec("INSERT INTO bookmarks(url) VALUES('#{url}')")
 
