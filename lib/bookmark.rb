@@ -2,6 +2,14 @@ require 'pg'
 
 
 class Bookmark
+  attr_reader :id, :url, :title
+
+  def initialize(id, title, url)
+    @id = id
+    @url = url
+    @title = title
+  end
+
   def self.all
 
     if ENV['RACK_ENV'] == 'test'
@@ -10,7 +18,10 @@ class Bookmark
       connection = PG.connect(dbname: 'bookmark_manager')
     end
     result = connection.exec('SELECT * FROM bookmarks')
-    result.map { |bookmark| bookmark['url'].to_s + " - " + bookmark['title'].to_s }
+    result.map do |row|
+      Bookmark.new(row['id'], row['title'], row['url'])
+    end
+      #{ |bookmark| bookmark['url'].to_s + " - " + bookmark['title'].to_s }
 
   end
 

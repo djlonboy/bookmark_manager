@@ -7,12 +7,12 @@ describe Bookmark do
   end
 
   describe '.all' do
-    it 'returns all bookmarks' do
-
+    it 'returns all instances of bookmarks class' do
       bookmarks = Bookmark.all
-      expect(bookmarks).to include "http://google.com - Google"
-      expect(bookmarks).to include "www.bbc.co.uk - BBC"
-      expect(bookmarks).to include "http://www.makersacademy.com - Makers Academy"
+      expect(bookmarks.count).to eq 3
+      expect(bookmarks[0].title).to eq "Makers Academy"
+      expect(bookmarks[0].url).to eq "http://www.makersacademy.com"
+      expect(bookmarks[0].id).to eq "1"
     end
   end
 

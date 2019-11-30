@@ -10,11 +10,17 @@
 
 feature 'View bookmarks' do
   scenario 'returns the list of bookmarks' do
-  setup_table
-  visit ('/bookmarks')
-  expect(page).to have_content "http://google.com"
-  expect(page).to have_content "www.bbc.co.uk"
-  expect(page).to have_content "http://www.makersacademy.com"
-  expect(page).not_to have_content "www.radiotimes.co.uk"
+    setup_table
+    visit ('/bookmarks')
+    expect(page).to have_link "Google"
+    expect(page).to have_link "BBC"
+    expect(page).to have_link "Makers Academy"
+  end
+
+  scenario '- bookmark names are links' do
+    setup_table
+    visit ('/bookmarks')
+    click_link "BBC"
+    expect(page).to have_current_path("https://www.bbc.co.uk/", url: true)
   end
 end

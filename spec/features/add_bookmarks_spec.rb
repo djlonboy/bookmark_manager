@@ -7,7 +7,6 @@ feature 'Add bookmarks' do
     fill_in "title", with: "Myspace"
     click_button("Submit")
     visit ('/bookmarks')
-    expect(page).to have_content "www.myspace.com"
-    expect(page).to have_content "Myspace"
+    expect(page).to have_link "Myspace"
   end
 end
